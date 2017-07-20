@@ -42,6 +42,6 @@ class NegociacoesView extends View {
 	}
 
 	_getFooterTabela(model){
-		return model.negociacoes.reduce((ant, prox)=> ant + prox.volume, 0);
+		return model.volumeTotal;
 	}
 }

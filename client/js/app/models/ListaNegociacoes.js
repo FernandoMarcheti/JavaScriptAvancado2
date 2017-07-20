@@ -15,4 +15,8 @@ class ListaNegociacoes {
 	limpar(){
 		this._negociacoes = [];
 	}
+
+	get volumeTotal(){
+		return this._negociacoes.reduce((ant, prox)=> ant + prox.volume, 0);
+	}
 }
