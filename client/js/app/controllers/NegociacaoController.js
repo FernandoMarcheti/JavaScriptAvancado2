@@ -11,11 +11,11 @@ class NegociacaoController {
 		this._negociacoes = new Bind(
 				new ListaNegociacoes()
 				, new NegociacoesView($('#negociacoesView'))
-				, 'adiciona', 'limpar'
+				, 'adiciona', 'limpar', 'ordena', 'reverteOrdenacao'
 			);
 
 		this._mensagem = new Bind(new Mensagem(), new MensagemView($('#mensagemView')), 'texto');
-
+		this._campoOrdenado = '';
 	}
 
 	adiciona(event){
@@ -43,6 +43,16 @@ class NegociacaoController {
 	apaga(){
 		this._negociacoes.limpar();
 		this._mensagem.texto = "Negociações apagadas com sucesso";
+	}
+
+	ordena(campo){
+		if(this._campoOrdenado == campo) {
+			this._negociacoes.reverteOrdenacao();
+		} else {
+			this._negociacoes.ordena((a, b) => a[campo] - b[campo]);
+		}		
+
+		this._campoOrdenado = campo;
 	}
 
 	_criaNegociacao(){
